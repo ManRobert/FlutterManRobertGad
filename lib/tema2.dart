@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 int? number;
-String? output = "You have not entered a number";
+String? output = 'You have not entered a number';
 
 bool verifyIfIsSquare(int number) {
-  int st = 1, dr = number;
+  int st = 1;
+  int dr = number;
   while (st <= dr) {
-    int mij = (st + dr) ~/ 2;
-    if (mij * mij == number) return true;
+    final int mij = (st + dr) ~/ 2;
+    if (mij * mij == number) {
+      return true;
+    }
     if (mij * mij < number) {
       st = mij + 1;
     } else {
@@ -18,10 +21,13 @@ bool verifyIfIsSquare(int number) {
 }
 
 bool verifyIfIsTriangular(int number) {
-  int st = 1, dr = number;
+  int st = 1;
+  int dr = number;
   while (st <= dr) {
-    int mij = (st + dr) ~/ 2;
-    if (mij * mij * mij == number) return true;
+    final int mij = (st + dr) ~/ 2;
+    if (mij * mij * mij == number) {
+      return true;
+    }
     if (mij * mij < number) {
       st = mij + 1;
     } else {
@@ -32,13 +38,14 @@ bool verifyIfIsTriangular(int number) {
 }
 
 void update(int number) {
-  bool isSquare, isTriangular;
+  bool isSquare;
+  bool isTriangular;
   isSquare = verifyIfIsSquare(number);
   isTriangular = verifyIfIsTriangular(number);
   if (isSquare && isTriangular) {
-    output = "Number " '$number' ' is both Square and Triangular';
+    output = 'Number ' '$number' ' is both Square and Triangular';
   } else if (isSquare && !isTriangular) {
-    output = "Number " '$number' " is Square";
+    output = 'Number ' '$number' ' is Square';
   } else if (!isSquare && isTriangular) {
     output = "Number '$number' is Triangular";
   } else {
@@ -51,7 +58,7 @@ void main() {
 }
 
 class Homework2 extends StatelessWidget {
-  const Homework2({Key? key}) : super(key: key);
+  const Homework2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +69,7 @@ class Homework2 extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -79,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         title: const Center(child: Text('Number shapes')),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             const Text(
@@ -93,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   input = int.tryParse(value);
                   if (input == null) {
-                    error = "Please enter an integer!";
+                    error = 'Please enter an integer!';
                   } else {
                     error = null;
                     number = input;

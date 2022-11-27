@@ -159,7 +159,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             },
             child: const Text('Reset'),
           ),
-        )
+        ),
       ],
     );
   }

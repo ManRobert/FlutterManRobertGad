@@ -29,7 +29,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final List<String> _titles = <String>[];
   final List<String> _images = <String>[];
-  /*final List<String> _genres = <String>[];*/
+
+  final Map<String, dynamic> _genres = <String, dynamic>{};
   late bool _isLoading;
 
   @override
@@ -40,7 +41,7 @@ class _HomepageState extends State<Homepage> {
 
   void _getMovies() {
     setState(() => _isLoading = true);
-    _isLoading = true;
+    // get the movies
     get(Uri.parse('https://yts.mx/api/v2/list_movies.json')).then((
       Response response,
     ) {
@@ -52,12 +53,25 @@ class _HomepageState extends State<Homepage> {
         data['movies'] as List<dynamic>,
       );
       for (final Map<dynamic, dynamic> item in movies) {
+        // get the titles
         _titles.add(item['title'] as String);
+
+        // get the images
         _images.add(item['medium_cover_image'] as String);
 
-        /*for (int i = 0; i <= 2 ;i++) {
-          _genres.add(item['genres'][i]as String);
-        }*/
+        // get the genres
+        final List<dynamic> list = item['genres'] as List<dynamic>;
+        String movieCategory = '';
+        final StringBuffer buffer = StringBuffer();
+        final int listLength = list.length;
+        for (int i = 0; i < listLength; i++) {
+          buffer.write(list[i]);
+          if (listLength - i > 1) {
+            buffer.write('/');
+          }
+        }
+        movieCategory = buffer.toString();
+        _genres[item['title'] as String] = movieCategory;
       }
 
       setState(() {
@@ -77,14 +91,19 @@ class _HomepageState extends State<Homepage> {
       body: Builder(
         builder: (BuildContext context) {
           if (_isLoading) {
-            return const Center(child: CircularProgressIndicator(color: Colors.black,));
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            );
           }
           return PageView.builder(
             itemBuilder: (BuildContext buildContext, int index) {
               return Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 8),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
                     child: Container(
                       alignment: Alignment.topCenter,
                       width: MediaQuery.of(context).size.width / 1.5,
@@ -104,22 +123,24 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Expanded(
-                      child: Text(
-                        _titles[index],
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      _titles[index],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  /*Text(_genres[index][0],style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                  ),)*/
+                  Text(
+                    _genres[_titles[index]] as String,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                  )
                 ],
               );
             },

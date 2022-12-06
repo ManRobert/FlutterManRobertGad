@@ -98,6 +98,7 @@ class _HomepageState extends State<Homepage> {
             );
           }
           return PageView.builder(
+            itemCount: _titles.length,
             itemBuilder: (BuildContext buildContext, int index) {
               return Column(
                 children: <Widget>[

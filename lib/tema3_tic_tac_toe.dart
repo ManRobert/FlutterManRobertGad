@@ -55,9 +55,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     // check the Horizontals
     if (theWinningColor == Colors.white) {
       for (int i = 0; i <= 6; i = i + 3) {
-        if ((list![i] == list![i + 1]) &&
-            (list![i] == list![i + 2]) &&
-            list![i] != Colors.white) {
+        if ((list![i] == list![i + 1]) && (list![i] == list![i + 2]) && list![i] != Colors.white) {
           theWinningColor = list![i];
         }
       }
@@ -66,9 +64,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     // check the Verticals
     if (theWinningColor == Colors.white) {
       for (int i = 0; i <= 2; i++) {
-        if ((list![i] == list![i + 3]) &&
-            (list![i] == list![i + 6]) &&
-            list![i] != Colors.white) {
+        if ((list![i] == list![i + 3]) && (list![i] == list![i + 6]) && list![i] != Colors.white) {
           theWinningColor = list![i];
         }
       }
@@ -76,18 +72,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     // check the main diagonal
     if (theWinningColor == Colors.white) {
-      if ((list![0] == list![4]) &&
-          (list![0] == list![8]) &&
-          list![0] != Colors.white) {
+      if ((list![0] == list![4]) && (list![0] == list![8]) && list![0] != Colors.white) {
         theWinningColor = list![0];
       }
     }
 
     // check the second diagonal
     if (theWinningColor == Colors.white) {
-      if ((list![2] == list![4]) &&
-          (list![2] == list![6]) &&
-          list![2] != Colors.white) {
+      if ((list![2] == list![4]) && (list![2] == list![6]) && list![2] != Colors.white) {
         theWinningColor = list![2];
       }
     }

@@ -40,10 +40,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   void _onScroll() {
-    if (_controller.offset >
-            _controller.position.maxScrollExtent -
-                MediaQuery.of(context).size.height &&
-        !_isLoading) {
+    if (_controller.offset > _controller.position.maxScrollExtent - MediaQuery.of(context).size.height && !_isLoading) {
       _getMovies();
     }
   }
@@ -62,8 +59,7 @@ class _HomepageState extends State<Homepage> {
         'https://yts.mx/api/v2/list_movies.json?limit=20&page=$_page',
       ),
     );
-    final Map<String, dynamic> map =
-        jsonDecode(response.body) as Map<String, dynamic>;
+    final Map<String, dynamic> map = jsonDecode(response.body) as Map<String, dynamic>;
     final Map<String, dynamic> data = map['data'] as Map<String, dynamic>;
     final List<Map<dynamic, dynamic>> movies = List<Map<dynamic, dynamic>>.from(
       data['movies'] as List<dynamic>,
@@ -174,10 +170,7 @@ class Movie {
   Movie.fromJson(Map<dynamic, dynamic> item)
       : title = item['title'] as String,
         image = item['medium_cover_image'] as String,
-        genres = item['genres']
-            .toString()
-            .substring(1)
-            .substring(0, item['genres'].toString().length - 2);
+        genres = item['genres'].toString().substring(1).substring(0, item['genres'].toString().length - 2);
 
   final String title;
   final String image;

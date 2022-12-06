@@ -45,11 +45,9 @@ class _HomepageState extends State<Homepage> {
     get(Uri.parse('https://yts.mx/api/v2/list_movies.json')).then((
       Response response,
     ) {
-      final Map<String, dynamic> map =
-          jsonDecode(response.body) as Map<String, dynamic>;
+      final Map<String, dynamic> map = jsonDecode(response.body) as Map<String, dynamic>;
       final Map<String, dynamic> data = map['data'] as Map<String, dynamic>;
-      final List<Map<dynamic, dynamic>> movies =
-          List<Map<dynamic, dynamic>>.from(
+      final List<Map<dynamic, dynamic>> movies = List<Map<dynamic, dynamic>>.from(
         data['movies'] as List<dynamic>,
       );
       for (final Map<dynamic, dynamic> item in movies) {
@@ -103,8 +101,7 @@ class _HomepageState extends State<Homepage> {
               return Column(
                 children: <Widget>[
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 8),
                     child: Container(
                       alignment: Alignment.topCenter,
                       width: MediaQuery.of(context).size.width / 1.5,

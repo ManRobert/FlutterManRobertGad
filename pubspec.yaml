@@ -8,10 +8,11 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.18.4 <3.0.0'
 
+
 dependencies:
-  cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
